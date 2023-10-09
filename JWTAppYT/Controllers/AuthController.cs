@@ -5,18 +5,16 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Json.Nodes;
 
 namespace JWTAppYT.Controllers
 {
     [Controller]
     public class AuthController : Controller
     {
-        private static List<User> UserList = new List<User>();
+        private static List<User> UserList = new ();
         private readonly AppSettings _applicationSettings;
         private readonly HttpClient _httpClient;
 
@@ -202,7 +200,7 @@ namespace JWTAppYT.Controllers
 
             using (HMACSHA512? hmac = new HMACSHA512(user.PasswordSalt))
             {
-                var compute = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                var compute = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
                 result = compute.SequenceEqual(user.PasswordHash);
             }
 
@@ -219,7 +217,7 @@ namespace JWTAppYT.Controllers
                 using (HMACSHA512? hmac = new HMACSHA512())
                 {
                     user.PasswordSalt = hmac.Key;
-                    user.PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(model.Password));
+                    user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(model.Password));
                 }
             }
             else

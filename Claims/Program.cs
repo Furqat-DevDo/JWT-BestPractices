@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace Claims
 {
-    public class Program
+    public abstract class Program
     {
         public static void Main(string[] args)
         {

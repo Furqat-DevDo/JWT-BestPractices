@@ -7,19 +7,12 @@ namespace JWTAppYT.Controllers
     [ApiController]
     public class ItemsController : Controller
     {
-        public List<string> colorList = new List<string>() { "blue", "red", "green", "yellow", "pink" };
+        public List<string> colorList = new () { "blue", "red", "green", "yellow", "pink" };
 
         [HttpGet("GetColorList")]
         public List<string> GetColorList()
         {
-            try
-            {
-                return colorList;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return colorList;
         }
     }
 }
